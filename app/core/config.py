@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings
-
+# Конфигурация проекта
+# Здесь хранятся все настройки: база данных, секретный ключ, Redis и т.д.
 class Settings(BaseSettings):
     DATABASE_URL: str = "sqlite:///./app.db"
     SECRET_KEY: str = "super_secret_key_for_demo_project_change_me"
