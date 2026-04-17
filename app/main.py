@@ -11,13 +11,12 @@ app = FastAPI(title="Task Tracker API", version="1.0.0")
 
 @app.on_event("startup")
 def on_startup():
-    from app.core.database import SessionLocal
-    from app.repositories.user import UserRepository
-
+    Base.metadata.create_all(bind=engine)
     db = SessionLocal()
     try:
         repo = UserRepository(db)
         if not repo.get_by_username("admin"):
+            print("Создаём админа...")
             repo.create(
                 email="admin@example.com",
                 username="admin",
@@ -25,6 +24,9 @@ def on_startup():
                 password="Admin123",
                 role="admin"
             )
+            print("Админ создан")
+    except Exception as e:
+        print(f"Ошибка при создании админа: {e}")
     finally:
         db.close()
 
