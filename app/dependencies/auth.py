@@ -12,7 +12,7 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     payload = decode_access_token(token)
     user_id = payload.get("sub")
     if user_id is None:
-        raise HTTPException(status_code=401, detail="Токен не содержит пользователя")
+        raise HTTPException(status_code=401, detail="Неверный токен авторизации")
 
     user = UserRepository(db).get_by_id(int(user_id))
     if not user:
