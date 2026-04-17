@@ -19,16 +19,24 @@ class TaskService:
 
     def list_tasks(self, user_id: int):
         cache_key = self._cache_key(user_id)
+
         if redis_client:
-            cached = redis_client.get(cache_key)
-            if cached:
-                return json.loads(cached)
+            try:
+                cached = redis_client.get(cache_key)
+                if cached:
+                    return json.loads(cached)
+            except:
+                pass  # если redis упал - работаем без кэша
 
         tasks = self.task_repo.list_by_owner(user_id)
-        result = [task.__dict__ for task in tasks]  # простой вариант
+        result = [task.__dict__ for task in tasks]
 
         if redis_client:
-            redis_client.setex(cache_key, 60, json.dumps(result, default=str))
+            try:
+                redis_client.setex(cache_key, 60, json.dumps(result, default=str))
+            except:
+                pass
+
         return result
 
     def get_task_for_user(self, task_id: int, current_user):
