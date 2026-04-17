@@ -43,6 +43,8 @@ class TaskService:
         task = self.task_repo.get_by_id(task_id)
         if not task:
             raise HTTPException(status_code=404, detail="Задача не найдена")
+
         if task.owner_id != current_user.id and current_user.role != "admin":
-            raise HTTPException(status_code=403, detail="Нет доступа")
+            raise HTTPException(status_code=403, detail="У вас нет доступа к этой задаче")
+
         return task
