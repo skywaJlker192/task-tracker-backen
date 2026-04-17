@@ -27,6 +27,11 @@
 ![img_6.png](adminka.png)
 ### 8. Docker контейнеры
 ![img_7.png](docker.png)
+### Что было сделано во время рефакторинга:
+- Разбил монолит на слои (core, models, schemas, repositories, services, routers)
+- Добавил Docker + docker-compose
+- Настроил Redis кэширование
+- Сделал 12+ коммитов
 ### Как запустить
 
 **Обычный запуск:**
