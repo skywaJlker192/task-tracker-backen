@@ -11,6 +11,8 @@ class AuthService:
             raise HTTPException(status_code=400, detail="Email уже используется")
         if self.user_repo.get_by_username(data.username):
             raise HTTPException(status_code=400, detail="Username уже используется")
+        if len(data.password) < 8:
+            raise HTTPException(status_code=400, detail="Пароль должен быть минимум 8 символов")
 
         return self.user_repo.create(
             email=data.email,
