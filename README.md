@@ -22,7 +22,7 @@
 ### 5. Создание задачи
 ![img_4.png](task_create.png)
 ### 6. Список задач
-![img_5.png](task_list.png)
+![C:\Users\studentcoll\Desktop\ex\img_2.png](task_list.png)
 ### 7. Админка /admin/users
 ![img_6.png](adminka.png)
 ### 8. Docker контейнеры
