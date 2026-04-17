@@ -11,6 +11,6 @@ class Task(Base):
     description = Column(Text, default="")
     status = Column(String(30), default="new", nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)
-
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     owner = relationship("User", back_populates="tasks")
