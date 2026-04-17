@@ -1,3 +1,5 @@
+from http.client import HTTPException
+
 from fastapi import APIRouter, Depends
 from app.schemas.user import RegisterRequest, UserOut
 from app.services.auth import AuthService
@@ -7,7 +9,8 @@ from sqlalchemy.orm import Session
 router = APIRouter()
 
 @router.post("/register", response_model=UserOut, status_code=201)
-def register(data: RegisterRequest, db: Session = Depends(get_db)):
+@router.post("/login")
+@router.get("/me", response_model=UserOut)def register(data: RegisterRequest, db: Session = Depends(get_db)):
     service = AuthService(db)
     return service.register_user(data)
 
