@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime
 from datetime import datetime
 from app.core.database import Base
-
+# Модель пользователя в базе данных
 class User(Base):
     __tablename__ = "users"
 
